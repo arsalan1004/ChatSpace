@@ -10,7 +10,6 @@ function Chat() {
     const response = await axios.get("http://localhost:3000/chat", {
       withCredentials: true,
     });
-    console.log(response);
     return response;
   };
 

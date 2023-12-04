@@ -3,10 +3,26 @@ import axios from "axios";
 import { userContext } from "../../userContext";
 import "./Conversation.css";
 
-function Conversation() {
-  const [conversations, setConversations] = useState([]);
-  const abc = useContext(userContext);
-  console.log(abc);
+function Conversation({ conversation, currentUser }) {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const friendId = conversation.members.filter(
+      (m) => m !== currentUser.userId
+    );
+
+    const getFriend = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3000/api/users/" + friendId[0]
+        );
+        setUser(res.data);
+      } catch (error) {
+        console.log(`get friend error ${error}`);
+      }
+    };
+    getFriend();
+  }, [currentUser, conversation]);
 
   return (
     <>
@@ -25,7 +41,7 @@ function Conversation() {
             />
           </svg>
         </div>
-        <span className="conversationName"> John Doe</span>
+        <span className="conversationName">{user.username}</span>
       </div>
     </>
   );

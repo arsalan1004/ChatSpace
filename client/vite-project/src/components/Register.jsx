@@ -22,8 +22,6 @@ function Register() {
 
     setLoggedUsername(username);
     setId(response.data.userId);
-
-    console.log(loggedusername, id);
   };
 
   return (

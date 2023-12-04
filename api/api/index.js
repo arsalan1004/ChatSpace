@@ -9,6 +9,7 @@ const bcrypt = require("bcryptjs");
 const { userModel } = require("../models/userModel");
 const { router } = require("../routes/conversationRoute");
 const { messageRouter } = require("../routes/messagesRoute");
+const { getUserRouter } = require("../routes/getUserRoute");
 
 // connect with database
 require("../config/db");
@@ -144,7 +145,6 @@ app.get("/profile", (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, (err, userData) => {
       if (err) throw err;
-      console.log(userData);
       res.json(userData);
     });
   } else {
@@ -154,6 +154,7 @@ app.get("/profile", (req, res) => {
 
 app.use("/api/conversation", router);
 app.use("/api/messages", messageRouter);
+app.use("/api/users", getUserRouter);
 
 server.listen(3000, () => {
   console.log("Server listening on port 3000");
