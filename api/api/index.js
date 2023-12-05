@@ -99,44 +99,44 @@ app.use("/login", async (req, res) => {
 });
 
 // REGSITER SOCKET
-app.get("/chat", (req, res) => {
-  const io = new Server(server, {
-    cookie: true,
-    cors: {
-      origin: "http://localhost:5173",
-      methods: ["GET", "POST"],
-    },
-  });
+// app.get("/chat", (req, res) => {
+//   const io = new Server(server, {
+//     cookie: true,
+//     cors: {
+//       origin: "http://localhost:5173",
+//       methods: ["GET", "POST"],
+//     },
+//   });
 
-  // ESTABLISHING CONNECTION
-  io.on("connection", async (socket) => {
-    const token = req.cookies.token;
-    let list = [];
+//   // ESTABLISHING CONNECTION
+//   io.on("connection", async (socket) => {
+//     const token = req.cookies.token;
+//     let list = [];
 
-    if (token) {
-      jwt.verify(token, jwtSecret, {}, (err, userData) => {
-        if (err) throw err;
-        const { userId, username } = userData;
-        socket.userId = userId;
-        socket.username = username;
-      });
-    }
+//     if (token) {
+//       jwt.verify(token, jwtSecret, {}, (err, userData) => {
+//         if (err) throw err;
+//         const { userId, username } = userData;
+//         socket.userId = userId;
+//         socket.username = username;
+//       });
+//     }
 
-    // const sockets = await io.sockets.fetchSockets();
-    // sockets.forEach((sck) => console.log(sck.username));
+//     // const sockets = await io.sockets.fetchSockets();
+//     // sockets.forEach((sck) => console.log(sck.username));
 
-    list.push(io.sockets.sockets.username);
-    //console.log(list);
-  });
+//     list.push(io.sockets.sockets.username);
+//     //console.log(list);
+//   });
 
-  io.on("disconnect", (socket) => {
-    // Remove disconnected client from the data structure
-    delete connectedClients[socket.id];
+//   io.on("disconnect", (socket) => {
+//     // Remove disconnected client from the data structure
+//     delete connectedClients[socket.id];
 
-    // Your other disconnection logic...
-  });
-  res.json({ data: "hello world" });
-});
+//     // Your other disconnection logic...
+//   });
+//   res.json({ data: "hello world" });
+// });
 
 // get user data
 app.get("/profile", (req, res) => {

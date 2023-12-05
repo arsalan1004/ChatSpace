@@ -4,7 +4,6 @@ const { userModel } = require("../models/userModel");
 getUserRouter.get("/:userId", async (req, res) => {
   try {
     const userData = await userModel.findById(req.params.userId);
-    console.log(userData);
     res.status(200).json(userData);
   } catch (error) {
     console.log(`Error in getUserRouter: ${error}`);
