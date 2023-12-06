@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 
 const io = new Server(server, {
+  cookie: true,
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -37,9 +38,7 @@ io.on("connection", (socket) => {
 
   // send message
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-    console.log("in sendMessage socekt backend");
     const user = users.find((user) => user.userId === receiverId);
-    console.log(user);
     io.to(user.socketId).emit("getMessage", {
       senderId,
       text,

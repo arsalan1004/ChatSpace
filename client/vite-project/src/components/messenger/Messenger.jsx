@@ -17,6 +17,8 @@ function Messenger() {
   const [tracker, setTracker] = useState("");
   const scrollRef = useRef();
 
+  axios.defaults.withCredentials = true;
+
   // SET SOCKET USEEFFECT
   useEffect(() => {
     try {
@@ -84,14 +86,11 @@ function Messenger() {
         user.userId,
         newMessages
       );
-      socket?.emit("sendMessage", {
+      await socket?.emit("sendMessage", {
         senderId: user.userId,
         receiverId: currentChat.members.find((mem) => mem !== user.userId),
         text: newMessages,
       });
-      console.log("calling function");
-      getMessageEvent();
-      console.log("after calling function");
     } catch (error) {
       console.log(`error at sendMessage socket event ${error}`);
     }
@@ -104,6 +103,15 @@ function Messenger() {
       console.log(`Error occured at handle message send button ${error}`);
     }
   };
+
+  // get messages socket useeffect
+  socket?.on("getMessage", (data) => {
+    setArrivalMessages({
+      sender: data.senderId,
+      text: data.text,
+      createdAt: Date.now(),
+    });
+  });
 
   // Get and set the user data
   useEffect(() => {
@@ -144,41 +152,6 @@ function Messenger() {
     };
     getMessages();
   }, [currentChat]);
-
-  // get messages socket useeffect
-
-  function getMessageEvent() {
-    console.log("In get mesage function");
-    socket?.on("getMessage", (data) => {
-      console.log(data);
-      setArrivalMessages({
-        sender: data.senderId,
-        text: data.text,
-        createdAt: Date.now(),
-      });
-      console.log({
-        sender: data.senderId,
-        text: data.text,
-        createdAt: Date.now(),
-      });
-    });
-  }
-
-  // useEffect(() => {
-  //   console.log("i am in getMessage useEffect");
-  //   socket?.on("getMessage", (data) => {
-  //     setArrivalMessages({
-  //       sender: data.senderId,
-  //       text: data.text,
-  //       createdAt: Date.now(),
-  //     });
-  //     console.log({
-  //       sender: data.senderId,
-  //       text: data.text,
-  //       createdAt: Date.now(),
-  //     });
-  //   });
-  // }, []);
 
   // scroll to bottom on new messages useEffect
   useEffect(() => {

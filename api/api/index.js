@@ -1,5 +1,6 @@
 const express = require("express");
 const cookisParser = require("cookie-parser");
+const session = require("express-session");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -30,6 +31,17 @@ app.use(
 );
 app.use(express.json());
 app.use(cookisParser());
+app.use(
+  session({
+    secret: jwtSecret,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "None", // Adjust based on your requirements
+      secure: process.env.NODE_ENV === "production", // Set to true in production
+    },
+  })
+);
 
 app.get("/", (req, res) => {
   res.json("Hello world");
@@ -141,6 +153,7 @@ app.use("/login", async (req, res) => {
 // get user data
 app.get("/profile", (req, res) => {
   const token = req.cookies?.token;
+  console.log(token);
 
   if (token) {
     jwt.verify(token, jwtSecret, {}, (err, userData) => {
