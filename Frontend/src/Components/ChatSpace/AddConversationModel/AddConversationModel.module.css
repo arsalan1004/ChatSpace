@@ -1,0 +1,54 @@
+#add-conversation-model {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.scrollStyle {
+  scrollbar-gutter: stable;
+  scrollbar-color: 'transparent';
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  display: flex; 
+  flex-direction: column; 
+  flex-grow: 1; 
+  row-gap: 8px;
+  /* overflow: hidden; */
+  overflow-y: scroll;
+  animation-name: animateAddConversationModel;
+  animation-duration: 0.8s;
+  padding: 10px;
+ 
+}
+
+
+@keyframes animateAddConversationModel {
+  from {
+   /* top: -300px; */
+    opacity: 0;
+  }
+  to {
+    /* top: 55%; */
+    opacity: 1;
+  }
+}
+
+/* 
+.scrollStyle {
+  scrollbar-gutter: stable;
+  scrollbar-color: 'transparent';
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+   display: flex; 
+   flex-direction: column;
+   flex-grow: 1; 
+  overflow: hidden;
+  overflow-y: scroll;
+} */
+
+
+.scrollStyle::-webkit-scrollbar {
+  display: none;
+} 

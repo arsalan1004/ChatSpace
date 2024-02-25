@@ -1,0 +1,19 @@
+.message-textarea {
+  width: 80%;
+  background-color: #EBF9FA;
+  font-family: 'itim';
+  outline: none;
+  /* padding-top: 8px; */
+  resize: none;
+  font-size: 14px;
+  line-height: 1.2;
+  caret-color: #b0c9fd;
+  padding: 16px 0 0 0;
+  color:#4FA8A1;
+  transition: all 0.4;
+  scroll-behavior: smooth;
+}
+
+.message-textarea::-webkit-scrollbar {
+  display: none;
+}

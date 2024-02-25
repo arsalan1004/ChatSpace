@@ -1,0 +1,27 @@
+.scrollStyle {
+  scrollbar-gutter: stable;
+  scrollbar-color: 'transparent';
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  overflow-y: scroll;
+
+}
+.scrollStyle::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+/* scrollbarGutter: 'stable',
+   
+scrollBehavior: 'smooth', 
+maxHeight: `${freeHeight}px`, 
+minHeight: `${freeHeight}px`,
+scrollbarColor: 'transparent',
+scrollbarWidth: 'none', */

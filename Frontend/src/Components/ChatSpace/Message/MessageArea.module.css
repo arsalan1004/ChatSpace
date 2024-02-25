@@ -1,0 +1,16 @@
+.scroll-message {
+  scrollbar-gutter: stable;
+  scrollbar-color: 'transparent';
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  column-gap: 12px;
+  padding: 4px;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+
+}
+.scroll-message::-webkit-scrollbar {
+  display: none;
+}
