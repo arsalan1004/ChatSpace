@@ -18,11 +18,11 @@ class Conversation(models.Model):
 
 # User and Conversation Join class
 class UserConv(models.Model):
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    convId = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default='')
+    convId = models.ForeignKey(Conversation, on_delete=models.CASCADE, blank=True, default='')
 
 # Message and Conversation Join class
-class UserConv(models.Model):
-    convId = models.ForeignKey(Conversation, on_delete=models.CASCADE)
-    messageId = models.ForeignKey(Message, on_delete=models.CASCADE)
+class MessageConv(models.Model):
+    convId = models.ForeignKey(Conversation, on_delete=models.CASCADE, blank=True, default='')
+    messageId = models.ForeignKey(Message, on_delete=models.CASCADE, blank=True, default='')
 
