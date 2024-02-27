@@ -8,6 +8,7 @@ class User(models.Model):
     lastName = models.CharField(max_length=200)
 
 class Message(models.Model):
+    senderId = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, default='')
     text = models.CharField(max_length=300)
     time = models.TimeField(auto_now=True)
 
