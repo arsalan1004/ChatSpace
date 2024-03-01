@@ -15,7 +15,7 @@ class Message(models.Model):
 class Conversation(models.Model):
     firstMember = models.ForeignKey(User, on_delete=models.CASCADE, related_name='first_member_conversations')
     secondMember = models.ForeignKey(User, on_delete=models.CASCADE, related_name='second_member_conversations')
-    lastMessage = models.ForeignKey(Message, on_delete=models.CASCADE)
+    lastMessage = models.ForeignKey(Message, on_delete=models.CASCADE,blank=True, default='', null=True)
 
 # User and Conversation Join class
 class UserConv(models.Model):
